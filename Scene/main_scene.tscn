@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5vccammxu67"]
+
+[ext_resource type="PackedScene" uid="uid://c75wcmkrqwfxq" path="res://Scene/Player.tscn" id="1_nnina"]
+[ext_resource type="Texture2D" uid="uid://rmky4r22y1ge" path="res://Assets/Background/darkPurple.png" id="2_yn4il"]
+
+[node name="main_scene" type="Node2D"]
+
+[node name="DarkPurple" type="Sprite2D" parent="."]
+position = Vector2(636.25, 533.5)
+scale = Vector2(7.24023, 5.51953)
+texture = ExtResource("2_yn4il")
+
+[node name="Player" parent="." instance=ExtResource("1_nnina")]
+position = Vector2(483, 401)
