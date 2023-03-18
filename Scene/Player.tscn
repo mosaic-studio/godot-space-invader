@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75wcmkrqwfxq"]
+[gd_scene load_steps=5 format=3 uid="uid://c75wcmkrqwfxq"]
 
 [ext_resource type="Texture2D" uid="uid://dvud2sg2yuaxe" path="res://Assets/Ship/playerShip1_red.png" id="1_f0rc6"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_k2gno"]
+[ext_resource type="PackedScene" uid="uid://bnovhfla7pcx1" path="res://Scene/bullet.tscn" id="2_jn70s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eicef"]
-radius = 45.0
+radius = 35.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_k2gno")
+Bullet = ExtResource("2_jn70s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -3.5)
@@ -18,6 +20,10 @@ shape = SubResource("CircleShape2D_eicef")
 [node name="PlayerShip1Red" type="Sprite2D" parent="MeshInstance2D"]
 rotation = 1.5708
 texture = ExtResource("1_f0rc6")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(38, 0)
+rotation = 1.5708
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
