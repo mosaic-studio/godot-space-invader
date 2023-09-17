@@ -46,10 +46,12 @@ func _shoot(delta: float):
 		var temp = Bullet.instantiate()
 		add_sibling(temp)
 		temp.global_position = get_node("BulletSpawn").get("global_position")
+		
+		temp.set("rotation", self.rotation)
 		# this sets the rotation as to where it will fire
 		temp.set("area_direction", (get_global_mouse_position() - self.global_position).normalized())
 		# These statements below handle camera shake
-		Camera.set("offset", Vector2(randf_range(-4, 4), randf_range(-4, 4)))
+		# Camera.set("offset", Vector2(randf_range(-4, 4), randf_range(-4, 4)))
 		timer = 0
 	else:
 		Camera.set("offset", Vector2(0, 0))
