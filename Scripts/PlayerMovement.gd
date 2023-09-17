@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
+const SPEED = 500.0
 @export var Bullet: PackedScene
 @onready var Camera = get_node("Camera2D")
 @export var fire_rate = 0.2
@@ -16,19 +16,30 @@ func _ready():
 
 
 func _move():
-	var direction_x = Input.get_axis("Left", "Right")
-	var direction_y = Input.get_axis("Up", "Down")
-	velocity.x = 0
-	velocity.y = 0
+	Camera.set("offset", Vector2(0, 0))
+	# var direction_x = Input.get_axis("Left", "Right")
+	# var direction_y = Input.get_axis("Up", "Down")
+
+	var speed = Input.get_action_strength("Move") * SPEED
+	# velocity.x = 0
+	# velocity.y = 0
 	
-	if direction_x:
-		velocity.x = direction_x * SPEED
-	if direction_y:
-		velocity.y = direction_y * SPEED
-		
+	# if direction_x:
+	# 	velocity.x = direction_x * SPEED
+	# if direction_y:
+	# 	velocity.y = direction_y * SPEED
+
+	var velocity_tmp = get_global_mouse_position() - self.global_position
+
+	self.velocity = velocity_tmp.normalized() * speed
+
+
+	# velocity = get_global_mouse_position()
+
 	self.look_at(get_global_mouse_position())
 	
 	move_and_slide()
+	# move_to_front()
 
 func _shoot(delta: float):
 	timer += delta
@@ -53,8 +64,6 @@ func _shoot(delta: float):
 		# These statements below handle camera shake
 		# Camera.set("offset", Vector2(randf_range(-4, 4), randf_range(-4, 4)))
 		timer = 0
-	else:
-		Camera.set("offset", Vector2(0, 0))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float):
